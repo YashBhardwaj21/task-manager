@@ -20,7 +20,18 @@ const login = async (req, res, next) => {
   }
 };
 
+const refresh = async (req, res, next) => {
+  try {
+    const { refreshToken } = req.body;
+    const result = await authService.refreshAccessToken(refreshToken);
+    sendResponse(res, 200, true, 'Access token refreshed', result);
+  } catch (error) {
+    next(error);
+  }
+};
+
 module.exports = {
   register,
-  login
+  login,
+  refresh
 };
