@@ -11,7 +11,7 @@ const authenticateToken = (req, res, next) => {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) {
-      return sendResponse(res, 403, false, "Access Denied: Invalid or expired token");
+      return sendResponse(res, 401, false, "Access Denied: Invalid or expired token");
     }
     req.user = user;
     next();
