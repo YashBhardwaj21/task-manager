@@ -8,7 +8,7 @@
 ✓ Docker  
 ✓ PostgreSQL + Prisma
 
-Production-ready Task Management System built with Node.js, Express, PostgreSQL, Prisma, React, JWT Authentication, RBAC, Swagger, Docker, and Automated Testing.
+Task Management System built with Node.js, Express, PostgreSQL, Prisma, React, JWT Authentication, RBAC, Swagger, Docker, and Automated Testing.
 
 ## Overview
 
@@ -278,16 +278,24 @@ As the system grows, the following architectural improvements are planned for ho
 ## Screenshots
 
 ### Login Page
-![Login](docs/images/login.png)
+![Login](<img width="1600" height="841" alt="WhatsApp Image 2026-06-01 at 10 27 54 PM" src="https://github.com/user-attachments/assets/9e357d89-d2ee-456e-966e-8259878f14b9" />
+)
 
 ### User Dashboard
-![User Dashboard](docs/images/dashboard.png)
+![User Dashboard](<img width="1600" height="834" alt="WhatsApp Image 2026-06-01 at 10 28 24 PM" src="https://github.com/user-attachments/assets/2e51783b-4e29-45a9-b545-4495fa4ea889" />
+)
 
 ### Admin Dashboard
-![Admin Dashboard](docs/images/admin-dashboard.png)
+![Admin Dashboard](<img width="1600" height="775" alt="WhatsApp Image 2026-06-01 at 10 29 23 PM" src="https://github.com/user-attachments/assets/b0fa68a5-5ddf-4cde-950d-d5fd6a57b892" />
+)
 
 ### Swagger Documentation
-![Swagger Documentation](docs/images/swagger.png)
+![Swagger Documentation](<img width="1600" height="827" alt="WhatsApp Image 2026-06-01 at 10 29 41 PM" src="https://github.com/user-attachments/assets/caf7db73-7cd1-4e54-86bf-864a100ab533" />
+)
+
+<img width="1600" height="825" alt="WhatsApp Image 2026-06-01 at 10 29 56 PM" src="https://github.com/user-attachments/assets/60874b60-e133-45d7-9c60-dcf036be0c3a" />
+
+<img width="1600" height="840" alt="WhatsApp Image 2026-06-01 at 10 30 14 PM" src="https://github.com/user-attachments/assets/1017b9e6-3be1-439a-810d-658e6421928a" />
 
 ## Author
 
