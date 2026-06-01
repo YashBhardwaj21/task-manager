@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
@@ -58,7 +58,7 @@ const Login = () => {
           </button>
         </form>
         <p style={{ marginTop: 16, textAlign: 'center', fontSize: 14 }}>
-          Don't have an account? <Link to="/register" style={{ color: 'var(--primary-color)' }}>Create Account</Link>
+          Don&apos;t have an account? <Link to="/register" style={{ color: 'var(--primary-color)' }}>Create Account</Link>
         </p>
       </div>
     </div>

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useToast } from '../context/ToastContext';
 import api from '../services/api';
 
 const Dashboard = () => {
-  const { user } = useAuth();
   const { showToast } = useToast();
   
   const [tasks, setTasks] = useState([]);
@@ -45,6 +44,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     fetchTasks();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [statusFilter, priorityFilter]);
 
   const handleSearch = (e) => {

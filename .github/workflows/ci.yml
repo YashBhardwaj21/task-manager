@@ -41,6 +41,9 @@ jobs:
       - name: Start Test Database
         run: npm run test:db:start
 
+      - name: Wait for Database
+        run: sleep 5
+
       - name: Run Prisma Migrations
         run: npm run test:prepare
 
