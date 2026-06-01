@@ -297,6 +297,9 @@ As the system grows, the following architectural improvements are planned for ho
 
 <img width="1600" height="840" alt="WhatsApp Image 2026-06-01 at 10 30 14 PM" src="https://github.com/user-attachments/assets/1017b9e6-3be1-439a-810d-658e6421928a" />
 
+
+<img width="709" height="719" alt="WhatsApp Image 2026-06-01 at 11 25 30 PM" src="https://github.com/user-attachments/assets/2b74ca72-7c20-4707-ad84-f0cc1c071465" />
+
 ## Author
 
 Yash Bhardwaj
