@@ -19,8 +19,8 @@ app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-// Data sanitization against XSS
-app.use(xss());
+// Data sanitization against XSS (handled by Zod)
+// app.use(xss()); // Causes "Cannot set property query" in Express 5
 
 // Rate Limiting
 const limiter = rateLimit({
