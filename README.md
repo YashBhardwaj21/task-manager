@@ -1,20 +1,30 @@
 # Task Management System
 
+✓ 31/31 Tests Passing  
+✓ 88.5% Coverage  
+✓ Swagger/OpenAPI  
+✓ JWT + Refresh Tokens  
+✓ RBAC  
+✓ Docker  
+✓ PostgreSQL + Prisma
+
 Production-ready Task Management System built with Node.js, Express, PostgreSQL, Prisma, React, JWT Authentication, RBAC, Swagger, Docker, and Automated Testing.
 
 ## Overview
 
-This project is a full-stack Task Management System developed as a Backend Developer Internship assignment.
+This project is a full-stack Task Management System developed as a Backend Developer Internship assignment. It demonstrates a scalable, secure, and fully-tested architecture suitable for production deployments.
 
-The application demonstrates:
-- JWT Authentication
-- Refresh Token Flow
+## Highlights
+
+- 31/31 Automated Tests Passing
+- 88.5% Test Coverage
+- JWT Authentication + Refresh Tokens
 - Role-Based Access Control (RBAC)
-- Task CRUD Operations
-- Pagination, Search & Filtering
-- Swagger Documentation
-- Docker Deployment
-- Automated Testing
+- PostgreSQL + Prisma ORM
+- Swagger/OpenAPI Documentation
+- Dockerized Deployment
+- Soft Deletes
+- Search, Filtering & Pagination
 
 ## Architecture
 
@@ -31,111 +41,173 @@ graph TD
     Prisma --> DB[(PostgreSQL)]
 ```
 
+### Request Flow
+
+Client
+↓
+JWT Authentication Middleware
+↓
+Validation Middleware (Zod)
+↓
+Controller
+↓
+Service
+↓
+Prisma ORM
+↓
+PostgreSQL
+
+## Design Decisions
+
+**Why Prisma?**
+- Type-safe ORM
+- Built-in migration support
+- Excellent developer experience and autocompletion
+
+**Why PostgreSQL?**
+- Strong relational integrity
+- ACID compliance
+- High scalability for complex queries
+
+**Why Service Layer Architecture?**
+- Separation of concerns (keeps controllers thin)
+- Easier unit and integration testing
+- Business logic is reusable across different routes or protocols
+
 ## Tech Stack
 
 ### Backend
-- Node.js
-- Express.js
-- PostgreSQL
-- Prisma ORM
-- JWT
-- Zod
+- Node.js & Express.js
+- PostgreSQL & Prisma ORM
+- JWT Authentication
+- Zod Validation
 - Swagger/OpenAPI
-- Winston
-- Jest
-- Supertest
+- Winston Logging
+- Jest & Supertest
 
 ### Frontend
-- React
-- Vite
+- React & Vite
 - Axios
 - React Router
 
 ### DevOps
-- Docker
-- Docker Compose
+- Docker & Docker Compose
+- GitHub Actions CI/CD
 
 ## Features
 
-### Authentication
-- User Registration
-- User Login
-- JWT Authentication
-- Refresh Token Rotation
+### Core Features
+- User Registration & Login
+- Task CRUD Operations (Create, Read, Update, Delete)
+- Soft Deletes for Tasks
+- Search, Pagination, Status & Priority Filtering
+- Admin Dashboard (View/Block Users, Manage Any Task)
 
-### Authorization
-- User Role
-- Admin Role
-- Protected Routes
-- RBAC
+### Security Features
+- **Authentication**: Access Tokens (15 minutes), Refresh Tokens (7 days)
+- **Authorization**: Strict Role-Based Access Control (User vs Admin)
+- **Data Protection**: bcrypt password hashing (12 rounds), Zod Input Validation, XSS Sanitization, Helmet Security Headers, Request Rate Limiting
 
-### Task Management
-- Create Task
-- View Tasks
-- Update Task
-- Soft Delete Task
-- Search
-- Pagination
-- Status Filtering
-- Priority Filtering
-
-### Admin Features
-- View Users
-- Block User
-- Unblock User
-- Delete Any Task
-
-### Quality & Security
-- Password Hashing (bcrypt)
-- Input Validation (Zod)
-- Global Error Handling
-- Logging (Winston)
-- Swagger Documentation
-- Automated Testing
-
-## Swagger Documentation
-
-Available at:
-http://localhost:5000/api-docs
-
-Features:
-- Bearer Authentication
-- Request Examples
-- Response Schemas
-- Error Responses
-- RBAC Documentation
+### Developer Features
+- Swagger/OpenAPI Documentation
+- Docker & Docker Compose Support
+- Winston Structured Logging
+- Automated Testing Pipeline (CI/CD via GitHub Actions)
+- Prisma Migrations
 
 ## Database Schema
 
-**User**
-- id
-- name
-- email
-- password
-- role
-- isBlocked
-
-**Task**
-- id
-- title
-- description
-- status
-- priority
-- userId
-- deletedAt
-
-## Backend Setup
-
-```bash
-cd backend
-npm install
-cp .env.example .env
-npx prisma migrate dev
-npm run seed
-npm run dev
+```mermaid
+erDiagram
+    USER ||--o{ TASK : owns
+    USER {
+        String id PK
+        String name
+        String email UK
+        String password
+        String role
+        Boolean isBlocked
+    }
+    TASK {
+        String id PK
+        String title
+        String description
+        String status
+        String priority
+        DateTime deletedAt
+        String userId FK
+    }
 ```
 
-## Frontend Setup
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| **POST** | `/api/v1/auth/register` | Register new user |
+| **POST** | `/api/v1/auth/login` | Login user |
+| **POST** | `/api/v1/auth/refresh` | Refresh JWT access token |
+| **POST** | `/api/v1/tasks` | Create a new task |
+| **GET** | `/api/v1/tasks` | Get paginated & filtered tasks |
+| **GET** | `/api/v1/tasks/:id` | Get specific task details |
+| **PUT** | `/api/v1/tasks/:id` | Update specific task |
+| **DELETE** | `/api/v1/tasks/:id` | Soft delete a task |
+| **GET** | `/api/v1/admin/users` | View all users (Admin only) |
+| **PATCH** | `/api/v1/admin/users/:id/block` | Block a user (Admin only) |
+| **PATCH** | `/api/v1/admin/users/:id/unblock` | Unblock a user (Admin only) |
+| **DELETE** | `/api/v1/admin/tasks/:id` | Delete any task (Admin only) |
+| **GET** | `/api/v1/health` | System health check |
+
+### Login Response Example
+
+```json
+{
+  "success": true,
+  "message": "Login successful",
+  "data": {
+    "user": {
+      "id": "12345-uuid",
+      "name": "John Doe",
+      "email": "john@test.com",
+      "role": "user"
+    },
+    "accessToken": "eyJhbGci...",
+    "refreshToken": "def456..."
+  }
+}
+```
+
+## Local Development
+
+### Running the Project Locally
+
+**Backend Server:** `http://localhost:5000`  
+**Frontend React App:** `http://localhost:5173`  
+**Swagger API Docs:** `http://localhost:5000/api-docs`  
+
+### Backend Setup
+
+1. **Install dependencies:**
+   ```bash
+   cd backend
+   npm install
+   ```
+
+2. **Configure Environment Variables:**
+   Copy `.env.example` to `.env` and fill in your database connections (e.g., Supabase or local PostgreSQL) and JWT secrets.
+   ```bash
+   cp .env.example .env
+   ```
+
+3. **Initialize Database & Start:**
+   Push the schema to your database, seed the admin account, and start the server.
+   ```bash
+   npx prisma db push
+   npx prisma generate
+   npm run seed
+   npm run dev
+   ```
+
+### Frontend Setup
 
 ```bash
 cd frontend
@@ -143,98 +215,38 @@ npm install
 npm run dev
 ```
 
-## Environment Variables
+### Docker
 
-```env
-DATABASE_URL=
-DIRECT_URL=
-JWT_SECRET=
-JWT_REFRESH_SECRET=
-PORT=
-```
-
-## Seed Data
-
-Run:
-
-```bash
-cd backend
-npm run seed
-```
-
-Default Admin Account:
-
-Email:
-admin@test.com
-
-Password:
-Admin@123
-
-## Docker
-
-Start services:
+Start full stack via Docker Compose:
 
 ```bash
 docker compose up --build -d
 ```
 
-The application includes:
-- Backend Container
-- PostgreSQL Container
-
 ## Automated Testing
 
-Run:
+The backend includes a full test suite using Jest and Supertest. It utilizes a dedicated Docker container for a completely isolated test database.
+
+### Test Coverage Areas
+- Authentication & Session Integrity
+- Refresh Tokens & Revocation
+- Role-Based Access Control (RBAC)
+- Ownership Security Checks
+- Input Validation (Zod)
+- Pagination & Search Constraints
+- Soft Deletes
+- Admin Operations
+
+1. Ensure Docker Desktop is running.
+2. Navigate to the backend directory and run the test sequence:
 
 ```bash
 cd backend
-npm test
+npm run test:db:start     # Starts the isolated PostgreSQL test container
+npm run test:prepare      # Runs Prisma migrations on the test DB
+npm run test:coverage     # Runs all Jest tests and generates a coverage report
+npm run test:db:stop      # Cleans up and shuts down the test container
 ```
-
-Coverage:
-- Statements: 88.5%
-- Branches: 76.8%
-- Functions: 90.9%
-- Lines: 89.1%
-
-Total Tests:
-31 / 31 Passing
-
-## API Endpoints
-
-**Authentication**
-- POST `/api/v1/auth/register`
-- POST `/api/v1/auth/login`
-- POST `/api/v1/auth/refresh`
-
-**Tasks**
-- POST `/api/v1/tasks`
-- GET `/api/v1/tasks`
-- GET `/api/v1/tasks/:id`
-- PUT `/api/v1/tasks/:id`
-- DELETE `/api/v1/tasks/:id`
-
-**Admin**
-- GET `/api/v1/admin/users`
-- PATCH `/api/v1/admin/users/:id/block`
-- PATCH `/api/v1/admin/users/:id/unblock`
-- DELETE `/api/v1/admin/tasks/:id`
-
-**System**
-- GET `/api/v1/health`
-
-## Security Features
-
-- bcrypt Password Hashing
-- JWT Authentication
-- Refresh Tokens
-- RBAC
-- Protected Routes
-- Ownership Checks
-- Input Validation (Zod)
-- Request Rate Limiting
-- XSS Sanitization
-- Helmet Security Headers
 
 ## Scalability Architecture & Roadmap
 
@@ -266,38 +278,19 @@ As the system grows, the following architectural improvements are planned for ho
 ## Screenshots
 
 ### Login Page
-*(Add screenshot here)*
+![Login](docs/images/login.png)
 
 ### User Dashboard
-*(Add screenshot here)*
+![User Dashboard](docs/images/dashboard.png)
 
 ### Admin Dashboard
-*(Add screenshot here)*
+![Admin Dashboard](docs/images/admin-dashboard.png)
 
 ### Swagger Documentation
-*(Add screenshot here)*
-
-## Future Improvements
-
-- Redis-based Refresh Token Revocation
-- Email Verification
-- Password Reset
-- Audit Logs
-- WebSocket Notifications
-- CI/CD Pipeline
+![Swagger Documentation](docs/images/swagger.png)
 
 ## Author
 
 Yash Bhardwaj
 
 Backend Developer Internship Assignment
-
----
-
-✓ 31/31 Tests Passing  
-✓ 88.5% Coverage  
-✓ Swagger/OpenAPI  
-✓ JWT + Refresh Tokens  
-✓ RBAC  
-✓ Docker  
-✓ PostgreSQL + Prisma
