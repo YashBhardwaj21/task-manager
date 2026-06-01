@@ -28,6 +28,16 @@ jobs:
       - name: Install Dependencies
         run: npm ci || npm install
 
+      - name: Create .env.test
+        run: |
+          echo "PORT=5000" > .env.test
+          echo "DATABASE_URL=postgresql://testuser:testpass@localhost:5433/testdb" >> .env.test
+          echo "DIRECT_URL=postgresql://testuser:testpass@localhost:5433/testdb" >> .env.test
+          echo "JWT_SECRET=test_secret_123" >> .env.test
+          echo "JWT_REFRESH_SECRET=test_refresh_123" >> .env.test
+          echo "JWT_EXPIRES_IN=15m" >> .env.test
+          echo "JWT_REFRESH_EXPIRES_IN=7d" >> .env.test
+
       - name: Start Test Database
         run: npm run test:db:start
 
