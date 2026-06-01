@@ -8,11 +8,7 @@
 ✓ Docker  
 ✓ PostgreSQL + Prisma
 
-Task Management System built with Node.js, Express, PostgreSQL, Prisma, React, JWT Authentication, RBAC, Swagger, Docker, and Automated Testing.
-
-## Overview
-
-This project is a full-stack Task Management System developed as a Backend Developer Internship assignment. It demonstrates a scalable, secure, and fully-tested architecture suitable for production deployments.
+Production-ready Task Management System demonstrating authentication, authorization, API design, testing, documentation, and scalable backend architecture.
 
 ## Highlights
 
@@ -26,13 +22,17 @@ This project is a full-stack Task Management System developed as a Backend Devel
 - Soft Deletes
 - Search, Filtering & Pagination
 
+## Overview
+
+This project is a full-stack Task Management System developed as a Backend Developer Internship assignment. It demonstrates a scalable, secure, and fully-tested architecture suitable for production deployments.
+
 ## Architecture
 
 The project follows a layered architecture: Controller → Service → Prisma. This separation improves maintainability, testability, and scalability.
 
 ```mermaid
 graph TD
-    Client[Client React App] -->|HTTP Axios + JWT Bearer| API_Gateway[API Gateway Express]
+    Client[Client React App] -->|HTTP Axios + JWT Bearer| API_Gateway[Express API Server]
     API_Gateway --> Routes[Routes /api/v1/*]
     Routes --> Middleware[Middleware Auth, Role, Validate, RateLimit]
     Middleware --> Controllers[Controllers HTTP ↔ Service bridge]
@@ -41,21 +41,23 @@ graph TD
     Prisma --> DB[(PostgreSQL)]
 ```
 
-### Request Flow
+### Security & Request Flow
 
-Client
+Request
 ↓
-JWT Authentication Middleware
+Rate Limiter
 ↓
-Validation Middleware (Zod)
+JWT Auth
+↓
+RBAC
+↓
+Validation
 ↓
 Controller
 ↓
 Service
 ↓
-Prisma ORM
-↓
-PostgreSQL
+Database
 
 ## Design Decisions
 
@@ -93,6 +95,18 @@ PostgreSQL
 ### DevOps
 - Docker & Docker Compose
 - GitHub Actions CI/CD
+
+## Project Structure
+
+```text
+primetrade/
+├── backend/                # Node.js, Express, Prisma, Jest
+├── frontend/               # React, Vite
+├── .github/workflows/      # GitHub Actions CI pipeline
+├── docs/images/            # Screenshots for documentation
+├── docker-compose.yml      # Multi-container orchestration
+└── README.md
+```
 
 ## Features
 
@@ -184,6 +198,18 @@ erDiagram
 **Frontend React App:** `http://localhost:5173`  
 **Swagger API Docs:** `http://localhost:5000/api-docs`  
 
+### Environment Variables
+
+Ensure you have a `.env` file in your `backend` directory. 
+
+```env
+DATABASE_URL=
+DIRECT_URL=
+JWT_SECRET=
+JWT_REFRESH_SECRET=
+PORT=5000
+```
+
 ### Backend Setup
 
 1. **Install dependencies:**
@@ -206,6 +232,15 @@ erDiagram
    npm run seed
    npm run dev
    ```
+
+### Default Admin Account
+
+Seeding the database will create a default admin user.
+
+```text
+Email: admin@test.com
+Password: Admin@123
+```
 
 ### Frontend Setup
 
@@ -278,24 +313,24 @@ As the system grows, the following architectural improvements are planned for ho
 ## Screenshots
 
 ### Login Page
-![Login](<img width="1600" height="841" alt="WhatsApp Image 2026-06-01 at 10 27 54 PM" src="https://github.com/user-attachments/assets/9e357d89-d2ee-456e-966e-8259878f14b9" />
-)
+![Login](https://github.com/user-attachments/assets/9e357d89-d2ee-456e-966e-8259878f14b9)
 
 ### User Dashboard
-![User Dashboard](<img width="1600" height="834" alt="WhatsApp Image 2026-06-01 at 10 28 24 PM" src="https://github.com/user-attachments/assets/2e51783b-4e29-45a9-b545-4495fa4ea889" />
-)
+![User Dashboard](https://github.com/user-attachments/assets/2e51783b-4e29-45a9-b545-4495fa4ea889)
 
-### Admin Dashboard
-![Admin Dashboard](<img width="1600" height="775" alt="WhatsApp Image 2026-06-01 at 10 29 23 PM" src="https://github.com/user-attachments/assets/b0fa68a5-5ddf-4cde-950d-d5fd6a57b892" />
-)
+### Admin Manage Users
+![Admin Dashboard](https://github.com/user-attachments/assets/b0fa68a5-5ddf-4cde-950d-d5fd6a57b892)
+
+### Admin Manage Tasks
+![Admin Manage Tasks](docs/images/admin-tasks.png)
 
 ### Swagger Documentation
-![Swagger Documentation](<img width="1600" height="827" alt="WhatsApp Image 2026-06-01 at 10 29 41 PM" src="https://github.com/user-attachments/assets/caf7db73-7cd1-4e54-86bf-864a100ab533" />
-)
+![Swagger Documentation 1](https://github.com/user-attachments/assets/caf7db73-7cd1-4e54-86bf-864a100ab533)
+![Swagger Documentation 2](https://github.com/user-attachments/assets/60874b60-e133-45d7-9c60-dcf036be0c3a)
+![Swagger Documentation 3](https://github.com/user-attachments/assets/1017b9e6-3be1-439a-810d-658e6421928a)
 
-<img width="1600" height="825" alt="WhatsApp Image 2026-06-01 at 10 29 56 PM" src="https://github.com/user-attachments/assets/60874b60-e133-45d7-9c60-dcf036be0c3a" />
-
-<img width="1600" height="840" alt="WhatsApp Image 2026-06-01 at 10 30 14 PM" src="https://github.com/user-attachments/assets/1017b9e6-3be1-439a-810d-658e6421928a" />
+### Test Coverage
+![Test Coverage](docs/images/coverage.png)
 
 
 <img width="709" height="719" alt="WhatsApp Image 2026-06-01 at 11 25 30 PM" src="https://github.com/user-attachments/assets/2b74ca72-7c20-4707-ad84-f0cc1c071465" />
