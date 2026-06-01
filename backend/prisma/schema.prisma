@@ -1,0 +1,40 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+// Ensure you configure this in your .env file
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      String   @default("user") // "user" or "admin"
+  isBlocked Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  tasks     Task[]
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  status      String   @default("pending") // pending, in-progress, completed
+  priority    String   @default("medium")  // low, medium, high
+
+  deletedAt   DateTime?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([status])
+}
