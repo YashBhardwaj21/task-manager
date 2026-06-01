@@ -321,9 +321,6 @@ As the system grows, the following architectural improvements are planned for ho
 ### Admin Manage Users
 ![Admin Dashboard](https://github.com/user-attachments/assets/b0fa68a5-5ddf-4cde-950d-d5fd6a57b892)
 
-### Admin Manage Tasks
-![Admin Manage Tasks](docs/images/admin-tasks.png)
-
 ### Swagger Documentation
 ![Swagger Documentation 1](https://github.com/user-attachments/assets/caf7db73-7cd1-4e54-86bf-864a100ab533)
 ![Swagger Documentation 2](https://github.com/user-attachments/assets/60874b60-e133-45d7-9c60-dcf036be0c3a)
