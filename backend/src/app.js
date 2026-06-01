@@ -6,7 +6,13 @@ const xss = require('xss-clean');
 const routesV1 = require('./routes/v1');
 const { errorHandler } = require('./middleware/error.middleware');
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./docs/swagger');
+
 const app = express();
+
+// Swagger Documentation Route
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // Security Middlewares
 app.use(helmet());
@@ -31,7 +37,7 @@ app.use('/api', limiter);
 app.use('/api/v1', routesV1);
 
 // Handle undefined routes
-app.use('*', (req, res, next) => {
+app.use((req, res, next) => {
   const error = new Error(`Route ${req.originalUrl} not found`);
   error.statusCode = 404;
   next(error);
