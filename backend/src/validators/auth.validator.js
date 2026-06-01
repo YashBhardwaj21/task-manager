@@ -16,25 +16,14 @@ const loginSchema = z.object({
   })
 });
 
-const validate = (schema) => (req, res, next) => {
-  try {
-    schema.parse({
-      body: req.body,
-      query: req.query,
-      params: req.params,
-    });
-    next();
-  } catch (error) {
-    return res.status(400).json({
-      success: false,
-      message: "Validation Error",
-      data: error.errors
-    });
-  }
-};
+const refreshSchema = z.object({
+  body: z.object({
+    refreshToken: z.string().min(1, "Refresh token is required")
+  })
+});
 
 module.exports = {
   registerSchema,
   loginSchema,
-  validate
+  refreshSchema
 };
