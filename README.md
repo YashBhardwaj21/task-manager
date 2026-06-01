@@ -330,10 +330,7 @@ As the system grows, the following architectural improvements are planned for ho
 ![Swagger Documentation 3](https://github.com/user-attachments/assets/1017b9e6-3be1-439a-810d-658e6421928a)
 
 ### Test Coverage
-![Test Coverage](docs/images/coverage.png)
-
-
-<img width="709" height="719" alt="WhatsApp Image 2026-06-01 at 11 25 30 PM" src="https://github.com/user-attachments/assets/2b74ca72-7c20-4707-ad84-f0cc1c071465" />
+![Test Coverage](https://github.com/user-attachments/assets/2b74ca72-7c20-4707-ad84-f0cc1c071465)
 
 ## Author
 
